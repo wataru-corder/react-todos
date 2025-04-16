@@ -1,5 +1,6 @@
 # react-todo
 React.jsでTODOリストをつくる（初級編）
+制作時間・・・6時間
 
 ## 機能
 
