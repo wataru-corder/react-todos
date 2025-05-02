@@ -1,4 +1,11 @@
-export const TodoArea = () => {
+import { TodoAreaProps, Todo } from "../types";
+
+export const TodoArea: React.FC<TodoAreaProps> = ({
+  filteredTodos,
+  handleStatusChange,
+  handleOpenEditForm,
+  handleDeleteFormChanges,
+}) => {
   return (
     <ul>
       {filteredTodos.map((todo) => (

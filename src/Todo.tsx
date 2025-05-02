@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { EditTodo, InputTodo } from "./components/EditTodo";
+import { EditTodo } from "./components/EditTodo";
+import { InputTodo } from "./components/InputTodo";
+import { TodoArea } from "./components/TodoArea";
+import { TodoType } from "./types";
 
-export const Todo = () => {
-  const [todos, setTodos] = useState([]);
-  const [todoTitle, setTodoTitle] = useState("");
-  const [isEditable, setIsEditable] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [editId, setEditId] = useState("");
-  const [filter, setFilter] = useState("notStarted");
-  const [filteredTodos, setFilteredTodos] = useState([]);
+export const Todo: React.FC = () => {
+  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [todoTitle, setTodoTitle] = useState<string>("");
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [newTitle, setNewTitle] = useState<string>("");
+  const [editId, setEditId] = useState<string>("");
+  const [filter, setFilter] = useState<string>("notStarted");
+  const [filteredTodos, setFilteredTodos] = useState<TodoType[]>([]);
 
   // TODOの追加フォームの入力内容を取得
   const handleAddFormChanges = (event) => {
@@ -18,7 +21,7 @@ export const Todo = () => {
   // TODOの追加
   const handleAddTodo = () => {
     if (todoTitle === "") return;
-    const newTodo = {
+    const newTodo: TodoType = {
       id: uuidv4(),
       title: todoTitle,
       status: "notStarted",
@@ -49,7 +52,7 @@ export const Todo = () => {
     setNewTitle(e.target.value);
   };
   // 編集フォームを閉じる
-  const handleClosedEditForm = (targetTodo) => {
+  const handleClosedEditForm = () => {
     setIsEditable(false);
     setTodoTitle("");
   };
@@ -94,39 +97,21 @@ export const Todo = () => {
           handleClosedEditForm={handleClosedEditForm}
         />
       ) : (
-        <div>
-          <input
-            type="text"
-            value={todoTitle}
-            onChange={handleAddFormChanges}
-          />
-          <button onClick={handleAddTodo}>作成</button>
-          <select value={filter} onChange={(e) => handleFilterChange(e)}>
-            <option value="all">すべて</option>
-            <option value="notStarted">未着手</option>
-            <option value="inProgress">作業中</option>
-            <option value="done">完了</option>
-          </select>
-        </div>
+        <InputTodo
+          todoTitle={todoTitle}
+          filter={filter}
+          handleAddFormChanges={handleAddFormChanges}
+          handleAddTodo={handleAddTodo}
+          handleFilterChange={handleFilterChange}
+        />
       )}
 
-      <ul>
-        {filteredTodos.map((todo) => (
-          <li key={todo.id}>
-            {todo.title}
-            <select
-              value={todo.status}
-              onChange={(event) => handleStatusChange(todo.id, event)}
-            >
-              <option value="notStarted">未着手</option>
-              <option value="inProgress">作業中</option>
-              <option value="done">完了</option>
-            </select>
-            <button onClick={() => handleOpenEditForm(todo)}>編集</button>
-            <button onClick={() => handleDeleteFormChanges(todo)}>削除</button>
-          </li>
-        ))}
-      </ul>
+      <TodoArea
+        filteredTodos={filteredTodos}
+        handleStatusChange={handleStatusChange}
+        handleOpenEditForm={handleOpenEditForm}
+        handleDeleteFormChanges={handleDeleteFormChanges}
+      />
     </>
   );
 };
