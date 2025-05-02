@@ -35,8 +35,6 @@ export interface TodoAreaProps {
   ) => void;
 }
 export interface StatusSelectProps {
-  todo: TodoType;
-  handleStatusChange: (
-    event: React.ChangeEventHandler<HTMLSelectElement>
-  ) => void;
+  value: string;
+  handleChange: (event: React.ChangeEventHandler<HTMLSelectElement>) => void;
 }

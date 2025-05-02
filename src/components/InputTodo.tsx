@@ -1,5 +1,6 @@
 import React from "react";
 import { InputTodoProps } from "../types";
+import { StatusSelect } from "./StatusSelect";
 
 export const InputTodo: React.FC<InputTodoProps> = ({
   todoTitle,
@@ -18,6 +19,10 @@ export const InputTodo: React.FC<InputTodoProps> = ({
         <option value="inProgress">作業中</option>
         <option value="done">完了</option>
       </select>
+      <StatusSelect
+        value={value}
+        handleChange={(event) => handleStatusChange(todo.id, event)}
+      />
     </div>
   );
 };
