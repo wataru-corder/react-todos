@@ -34,3 +34,9 @@ export interface TodoAreaProps {
     todo: React.MouseEventHandler<HTMLButtonElement>
   ) => void;
 }
+export interface StatusSelectProps {
+  todo: TodoType;
+  handleStatusChange: (
+    event: React.ChangeEventHandler<HTMLSelectElement>
+  ) => void;
+}

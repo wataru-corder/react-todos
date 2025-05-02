@@ -1,4 +1,5 @@
-import { TodoAreaProps, Todo } from "../types";
+import { TodoAreaProps } from "../types";
+import { StatusSelect } from "./StatusSelect";
 
 export const TodoArea: React.FC<TodoAreaProps> = ({
   filteredTodos,
@@ -11,14 +12,10 @@ export const TodoArea: React.FC<TodoAreaProps> = ({
       {filteredTodos.map((todo) => (
         <li key={todo.id}>
           {todo.title}
-          <select
+          <StatusSelect
             value={todo.status}
-            onChange={(event) => handleStatusChange(todo.id, event)}
-          >
-            <option value="notStarted">未着手</option>
-            <option value="inProgress">作業中</option>
-            <option value="done">完了</option>
-          </select>
+            handleChange={(event) => handleStatusChange(todo.id, event)}
+          />
           <button onClick={() => handleOpenEditForm(todo)}>編集</button>
           <button onClick={() => handleDeleteFormChanges(todo)}>削除</button>
         </li>
