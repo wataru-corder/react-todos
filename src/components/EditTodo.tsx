@@ -1,16 +1,18 @@
 import React from "react";
 
-export const EditTodo = () => {
+import { EditTodoProps } from "../types";
+
+export const EditTodo: React.FC<EditTodoProps> = ({
+  newTitle,
+  handleEditFormChanges,
+  handleEditTodo,
+  handleClosedEditForm,
+}) => {
   return (
     <div>
-      <input type="text" value={todoTitle} onChange={handleAddFormChanges} />
-      <button onClick={handleAddTodo}>作成</button>
-      <select value={filter} onChange={(e) => handleFilterChange(e)}>
-        <option value="all">すべて</option>
-        <option value="notStarted">未着手</option>
-        <option value="inProgress">作業中</option>
-        <option value="done">完了</option>
-      </select>
+      <input type="text" value={newTitle} onChange={handleEditFormChanges} />
+      <button onClick={handleEditTodo}>編集の保存</button>
+      <button onClick={handleClosedEditForm}>キャンセル</button>
     </div>
   );
 };
