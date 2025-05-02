@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { EditTodo, InputTodo } from "./components/EditTodo";
 
 export const Todo = () => {
   const [todos, setTodos] = useState([]);
@@ -86,15 +87,12 @@ export const Todo = () => {
   return (
     <>
       {isEditable ? (
-        <div>
-          <input
-            type="text"
-            value={newTitle}
-            onChange={handleEditFormChanges}
-          />
-          <button onClick={handleEditTodo}>編集の保存</button>
-          <button onClick={handleClosedEditForm}>キャンセル</button>
-        </div>
+        <EditTodo
+          newTitle={newTitle}
+          handleEditFormChanges={handleEditFormChanges}
+          handleEditTodo={handleEditTodo}
+          handleClosedEditForm={handleClosedEditForm}
+        />
       ) : (
         <div>
           <input
