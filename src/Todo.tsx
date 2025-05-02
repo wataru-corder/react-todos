@@ -29,13 +29,14 @@ export const Todo = () => {
   const handleDeleteFormChanges = (targetTodo) => {
     setTodos(todos.filter((todo) => todo !== targetTodo));
   };
-  // ステータス変更
   const handleStatusChange = (id, event) => {
     const newArray = todos.map((todo) =>
       todo.id === id ? { ...todo, status: event.target.value } : todo
     );
     setTodos(newArray);
   };
+  // ステータス変更
+
   // 編集フォームを開く
   const handleOpenEditForm = (targetTodo) => {
     setIsEditable(true);
