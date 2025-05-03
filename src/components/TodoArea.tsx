@@ -1,5 +1,5 @@
 import React from "react";
-import { TodoAreaProps } from "../types";
+import { TodoAreaProps, TodoType } from "../types";
 import { StatusSelect } from "./StatusSelect";
 
 export const TodoArea: React.FC<TodoAreaProps> = ({
@@ -10,7 +10,7 @@ export const TodoArea: React.FC<TodoAreaProps> = ({
 }) => {
   return (
     <ul>
-      {filteredTodos.map((todo) => (
+      {filteredTodos.map((todo: TodoType) => (
         <li key={todo.id}>
           {todo.title}
           <StatusSelect

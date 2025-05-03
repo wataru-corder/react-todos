@@ -1,9 +1,11 @@
 import React from "react";
 
+type TodoStatus = "notStarted" | "inProgress" | "done";
+
 export interface TodoType {
   id: string;
   title: string;
-  status: "notStarted" | "inProgress" | "done";
+  status: TodoStatus;
 }
 
 export interface EditTodoProps {
@@ -25,16 +27,12 @@ export interface TodoAreaProps {
   filteredTodos: TodoType[];
   handleStatusChange: (
     id: string,
-    e: React.ChangeEventHandler<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => void;
-  handleOpenEditForm: (
-    todo: React.MouseEventHandler<HTMLButtonElement>
-  ) => void;
-  handleDeleteFormChanges: (
-    todo: React.MouseEventHandler<HTMLButtonElement>
-  ) => void;
+  handleOpenEditForm: (todo: TodoType) => void;
+  handleDeleteFormChanges: (todo: TodoType) => void;
 }
 export interface StatusSelectProps {
   value: string;
-  handleChange: (event: React.ChangeEventHandler<HTMLSelectElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
